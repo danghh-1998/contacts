@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "github.com/danghh-1998/contacts/api;api";
+
+import "google/api/annotations.proto";
+
+message ContactRequest {
+  string name = 1;
+  string tel = 2;
+  string email = 3;
+}
+
+message ContactResponse {
+  string id = 1;
+  string name = 2;
+  string tel = 3;
+  string email = 4;
+  int64 created_at = 5;
+  int64 updated_at = 6;
+}
+
+service ContactService {
+  rpc CreateContact (ContactRequest) returns (ContactResponse) {
+    option (google.api.http) = {
+      post: "/contacts"
+      body: "*"
+    };
+  }
+}
